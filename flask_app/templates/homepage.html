@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav">
+        <div id="navbar">
+            <div id="nav-title">
+                <h1>Title</h1>
+            </div>
+            <div id="nav-inner">
+                <div> <h3><a href="/profile" style="text-decoration: none;color:black">Profile</a></h3></div>
+                <div><h3><a href="/create" style="text-decoration: none;color:black">Post</a></h3></div>
+                <div><h3><a href="/logout" style="text-decoration: none;color:black">Logout</a></h3></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+<div id="weather">
+    <div id="week">
+        <div id="day">
+            {% for e in all_events %}
+            <div id="row">
+                <div id="logo"><a href="/view/{{e.id}}" id="logo"><img src="{{e.image_url}}" alt=""></a></div>
+            </div>
+            {% endfor %}
+
+    </div>
+</div>
+<br>
+<br>
+<!-- body -->
+<div id="container">
+    <div id="post">
+        <h1>Play Games Together!</h1>
+        {% for e in all_events %}
+        <div id="single-post">
+            <div id="post-title">
+                <h1><a href="/view/{{e.id}}" style="text-decoration: none;color:black">{{e.title}}</a></h1>
+            </div>
+            <div id="post-body">
+                <h2>{{e.activity}}</h2>
+            </div>
+            <div id="post-by">
+                <h3>Game: {{e.location}}</h3>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+        <br>
+        <br>
+    </div>
+    <div id="list">
+        <div id="list-nav">
+            <h1>Active Players</h1>
+            <hr>
+            <br>
+                <form action="/submit_attend" method="POST">
+                    {% for user in logged_in %}
+                    <div class="input" hidden>
+                    <input type="text" name="name" value="{{user.gamer_tag}}" >
+                    </div>
+                    <input type="submit" value="Online" id="ready-player" >
+                    {% endfor %}
+                </form>
+        </div>
+        <div id="single-list">
+            {% for p in all_attend %}
+            {% for user in logged_in %}
+            {% for all in all_users %}
+            {% if all.gamer_tag == p.name %}
+            <ul>
+                <li>
+        <h2 id="list-home">
+                <a href="/profile2/{{all.id}}" style="text-decoration: none;color:black">{{all.gamer_tag}}</a>
+            {% endif %}
+        </h2>
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+                </li>
+            </ul>
+
+        </div>
+        <br>
+        <div id="inactive">
+            {% for p in all_attend %}
+            {% for user in logged_in %}
+            {% if p.name == user.gamer_tag %}
+            <button id="button-delete" ><a href="/delete_attend/{{p.id}}" style="text-decoration: none;color:black">Offline</a></button>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<script src="static/script.js"></script>
+</body>
+</html>

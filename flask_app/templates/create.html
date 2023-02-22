@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav">
+        <div id="navbar">
+            <div id="nav-title">
+                <h1>Title</h1>
+            </div>
+            <div id="nav-inner">
+                <div><h3><a href="/homepage" style="text-decoration: none;color:black">Home</a></h3></div>
+                <div><h3><a href="/create" style="text-decoration: none;color:black">Post</a></h3></div>
+                <div> <h3><a href="/profile" style="text-decoration: none;color:black">Profile</a></h3></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="create-container">
+
+        <div id="title-create">
+            <h1>Create a Post!!</h1>
+        </div>
+        <form action="/submit" method="POST">
+            <div id="create-form">
+                    <div class="input1">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" id="search"  >
+                </div>
+                    <div class="input1">
+                        <label for="location">Game:</label>
+                        <input type="text" name="location" id="search"  >
+                    </div>
+                    <br>
+            </div>
+            <div id="create-form3">
+                <div style="width: 25%;"></div>
+                <div class="input1">
+                    <label for="image_url">Image:</label>
+                    <input type="text" name="image_url" id="search3"  >
+                </div>
+            </div>
+            <div id="create-form1">
+                <div style="width: 20%;"></div>
+                <div class="input1">
+                    <label for="activity">Activity:</label>
+                    <textarea name="activity" id="search1"></textarea>
+                </div>
+            </div>
+            <div id="create-form">
+                <div id="create-post">
+                    <div style="width: 25%;"></div>
+                    <input type="submit" value="Post" id="create-submit">
+                    <div style="width: 25%;"></div>
+                </div>
+            </div>
+            </form>
+    </div>
+</body>
+</html>

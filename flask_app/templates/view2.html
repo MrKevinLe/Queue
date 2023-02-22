@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav">
+        <div id="navbar">
+            <div id="nav-title">
+                <h1>Title</h1>
+            </div>
+            <div id="nav-inner">
+                <div><h3><a href="/homepage" style="text-decoration: none;color:black">Home</a></h3></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="view-container">
+
+        <div id="view-post">
+            <div id="view-post-top">
+                <div style="width: 25%;"></div>
+                {% for e in single_e %}
+                <img src="{{e.image_url}}"></img>
+            </div>
+            <br>
+            <div id="view-post-bottom">
+                <div id="bottom1">
+                    <div id="b1">
+                        <h1>{{e.title}}</h1>
+                    </div>
+                    <div id="b2">
+                        <h3>Game: {{e.location}}</h3>
+                    </div>
+                </div>
+                <div id="b3">
+                    <h2>{{e.activity}}</h2>
+                </div>
+                <div id="b4">
+                    <h3>Posted By: {{e.first_name}}</h3>
+                    <!-- JOIN -->
+
+                    <!--  end JOIN -->
+                </div>
+                {% endfor %}
+            </div>
+            
+
+        </div>
+        <div id="view-players">
+            <div id="c1">
+            <h1>Players</h1>
+            </div>
+            <br>
+            <div id="c5">
+                <div>
+                    {% for m in manytomany %}
+                    {% for p in all_attend %}
+                    {% if p.id == m.attendance_id %}
+                        <h3>{{p.name}} 
+                        {% for l in logged_in %}
+                        {% if p.name == l.first_name %}                
+                            <button id="button-view-delete">
+                                <a href="/delete_many/{{m.event_id}}/{{p.id}}">X</a>
+                            </button>
+                        </h3>
+                                {% endif %}
+                                {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="c2">
+                {% for e in single_e %}
+                <form action="/submit_players" method="POST">
+            
+                    <div>
+                        <div hidden>
+                            <input type="text" name="event_id" value="{{e.id}}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div >
+                        {% for p in all_attend %}
+                        {% for l in logged_in %}
+                        {% if p.name == l.first_name %}
+                        <div hidden>
+                            <input type="text" name="attendance_id" value="{{p.id}}">
+                        </div>
+                        <input type="submit" value="JOIN" id="join">
+                    </div>
+                </div>
+                {% endif %}
+                    {% endfor %}
+                </form>
+                {% endfor %}
+                <br>
+                <br>
+                <br>
+                {% for e in single_e %}
+                {% for l in logged_in %}
+                {% if e.user_id == l.id %}                
+                <button id="button-close-event">
+                <a href="/delete_event/{{e.id}}">CLOSE EVENT</a>
+                </button>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            
+            </div>
+        </div>
+        </div>
+</body>
+</html>

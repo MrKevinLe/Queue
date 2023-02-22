@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav">
+        <div id="navbar">
+            <div id="nav-title">
+                <h1>Title</h1>
+            </div>
+            <div id="nav-inner">
+                <div><h3><a href="/login" style="text-decoration: none;color:black">login/Register</a></h3></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+<div id="weather">
+    <div id="week">
+        <div id="day">
+            {% for e in all_events %}
+            <div id="row">
+                <div id="logo"><a href="/view2/{{e.id}}" id="logo"><img src="{{e.image_url}}" alt=""></a></div>
+            </div>
+            {% endfor %}
+    </div>
+</div>
+<br>
+<br>
+<!-- body -->
+<div id="container">
+    <div id="post">
+        <h1>Events!</h1>
+        {% for e in all_events %}
+        <div id="single-post">
+            <div id="post-title">
+                <h1><a href="/view2/{{e.id}}" style="text-decoration: none;color:black">{{e.title}}</a></h1>
+            </div>
+            <div id="post-body">
+                <h2>{{e.activity}}</h2>
+            </div>
+            <div id="post-by">
+                <h2>Game: {{e.location}}</h2>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+        <br>
+        <br>
+    </div>
+    <div id="list">
+        <div id="list-nav">
+            <h1>Active Players</h1>
+            <hr>
+        </div>
+        <div id="single-list">
+            {% for p in all_attend %}
+            <ul>
+                <li>
+                <h2>{{p.name}}</h2>
+            {% endfor %}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<script src="static/script.js"></script>
+</body>
+</html>

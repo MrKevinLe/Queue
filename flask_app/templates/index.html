@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Front Page</title>
+</head>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div id="nav">
+    <div id="navbar">
+        <div id="nav-title">
+            <h1>Title</h1>
+        </div>
+        <div id="nav-inner">
+            <div><h3><a href="/homepage" style="text-decoration: none;color:black">Home</a></h3></div>
+            {% for user in logged_in %}
+            <div><h3>{{user.first_name}}</h3></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="container2">
+    <body>
+        <div class=" reg">
+        <form action="/register" method="POST">
+            <div class="header"><h1>Register</h1></div>
+            <br>
+            <div class="input">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name">
+            </div>
+            <div class="input">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name">
+            </div>
+            <div class="input">
+                <label for="gamer_tag">Gamer Tag:</label>
+                <input type="text" name="gamer_tag">
+            </div>
+            <div class="input">
+                <label for="phone_number">Phone Number:</label>
+                <input type="number" name="phone_number" required>
+            </div>
+            <div class="input">
+                <label for="email">Email:</label>
+                <input type="text" name="email">
+            </div>
+            <div class="input">
+                <label for="about">Description:</label>
+                <textarea name="about" id="description"></textarea>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="input">
+                <label for="age">Age:</label>
+                <input type="number" name="age" required>
+            </div>
+            <div class="input">
+                    <label for="password">Password:</label>
+                    <input type="text" name="password">
+                </div>
+                <div class="input">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="text" name="confirm_password">
+                </div>
+                <div >
+                    <input type="submit" value="register" id="button-reg">
+                </div>
+        </form>
+        </div>
+        <div class="signin">
+            <form action="/login" method="POST">
+                <div class="header"><h1> Login</h1></div>
+                <br>
+                <div class="input">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email">
+                </div>
+                <div class="input">
+                    <label for="password">Password:</label>
+                    <input type="text" name="password">
+                </div>
+                <div >
+                    <input type="submit" value="login" id="button-login"> 
+                </div>
+                </form>
+        </div>
+</div>
+</body>
+</html>

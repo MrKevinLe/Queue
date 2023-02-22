@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav">
+        <div id="navbar">
+            <div id="nav-title">
+                <h1>Title</h1>
+            </div>
+            <div id="nav-inner">
+                <div><h3><a href="/homepage" style="text-decoration: none;color:black">Home</a></h3></div>
+                <div><h3><a href="/create" style="text-decoration: none;color:black">Post</a></h3></div>
+                <div><h3><a href="/logout" style="text-decoration: none;color:black">Logout</a></h3></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div id="container3">
+        {% for user in logged_in %}
+        <div id="pro-nav">
+        <h1>Name: {{user.first_name}} {{user.last_name}}</h1>
+        <h2>Age: {{user.age}}</h2>
+    </div>
+    <div id="text">
+        <h3>About:</h3>
+    </div>
+        <div id="pro-body">
+            <h3>{{user.about}} </h3>
+        </div>
+        <div id="pro-close">
+            <h3>Phone Number: {{user.phone_number}}</h3>
+            <h3>Email: {{user.email}}</h3>
+            <h3>Gamer Tag: {{user.gamer_tag}}</h3>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+    <div id="active-events">
+        <div id="a-e-nav">
+            <h1> Active Events</h1>
+        </div>
+        <div id="a-e-body">
+            {% for m in manytomany %}
+            {% for p in logged_in %}
+            {% for a in all_attend %}
+            {% for e in all_events %}
+            {% if m.attendance_id == a.id %}
+            {% if a.name == p.first_name %}
+            {% if m.event_id == e.id %}
+            <ul>
+                <div id="list-events">
+                    <li><h2><a href="/view/{{e.id}}">{{e.title}}</a></h2></li>
+                </div>
+            </ul>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+
+        </div>
+    </div> 
+</body>
+</html>
